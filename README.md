@@ -1,1 +1,0 @@
-# Tamagotchi-2.0
