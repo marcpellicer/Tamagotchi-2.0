@@ -41,8 +41,8 @@ public class Gemelos extends Juego {
 
         tamagochi.cambiarDinero(ganancia);
         Utils.escribirConEfecto(ganancia > 0
-                ? "\n" + tamagochi.getNombre() + " ha ganado " + ganancia + " $"
-                : "\n" + tamagochi.getNombre() + " ha perdido " + (-ganancia) + " $", 30);
+                ? "\n" + tamagochi.getNombre() + " ha ganado --> " + ganancia + " $"
+                : "\n" + tamagochi.getNombre() + " ha perdido --> " + (-ganancia) + " $", 30);
 
         tamagochi.cambiarSueno(10);
         tamagochi.cambiarHambre(6);
