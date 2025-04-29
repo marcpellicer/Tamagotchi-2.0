@@ -26,29 +26,24 @@ public class Juego26 extends Juego {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("");
-            System.out.print("Presiona Enter para lanzar el dado: ");
+            Utils.escribirConEfecto("\nPresiona Enter para lanzar el dado: ", 30);
             scanner.nextLine();
             int dadoJugador = random.nextInt(6) + 1;
             puntosJugador += dadoJugador;
-            System.out.println("Jugador 1 (Tamagochi) ha sacado --> " + dadoJugador);
+            Utils.escribirConEfecto("Jugador 1 (Tamagochi) ha sacado --> " + dadoJugador, 30);
             if (puntosJugador > 26) {
                 puntosJugador -= dadoJugador;
             }
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
+
             int dadoMaquina = random.nextInt(6) + 1;
             puntosMaquina += dadoMaquina;
-            System.out.println("Jugador 2 (Máquina) ha sacado --> " + dadoMaquina);
+            Utils.escribirConEfecto("Jugador 2 (Máquina) ha sacado --> " + dadoMaquina, 30);
             if (puntosMaquina > 26) {
                 puntosMaquina -= dadoMaquina;
             }
-            System.out.println("");
-            System.out.println("Jugador 1 (Tamagochi): " + puntosJugador);
-            System.out.println("Jugador 2 (Máquina): " + puntosMaquina);
+
+            Utils.escribirConEfecto("\nJugador 1 (Tamagochi): " + puntosJugador, 30);
+            Utils.escribirConEfecto("Jugador 2 (Máquina): " + puntosMaquina, 30);
 
             if (puntosJugador == 26 || puntosMaquina == 26) {
                 break;
