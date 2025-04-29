@@ -1,17 +1,20 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class Juego26 {
-    private Tamagochi tamagochi;
+public class Juego26 extends Juego {
 
     public Juego26(Tamagochi tamagochi) {
-        this.tamagochi = tamagochi;
+        super(tamagochi);
+    }
+
+    @Override
+    public void jugar() {
+        Utils.escribirConEfecto("Iniciando el juego del 26...", 30);
     }
 
     public void jugar26(int apuesta) {
         if (apuesta > tamagochi.getDinero()) {
-            System.out.println("");
-            System.out.println(tamagochi.getNombre() + " no tiene suficiente dinero para apostar.");
+            Utils.escribirConEfecto("\n" + tamagochi.getNombre() + " no tiene suficiente dinero para apostar.", 30);
             return;
         }
 
@@ -32,20 +35,17 @@ public class Juego26 {
             if (puntosJugador > 26) {
                 puntosJugador -= dadoJugador;
             }
-
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
-
             int dadoMaquina = random.nextInt(6) + 1;
             puntosMaquina += dadoMaquina;
             System.out.println("Jugador 2 (Máquina) ha sacado --> " + dadoMaquina);
             if (puntosMaquina > 26) {
                 puntosMaquina -= dadoMaquina;
             }
-
             System.out.println("");
             System.out.println("Jugador 1 (Tamagochi): " + puntosJugador);
             System.out.println("Jugador 2 (Máquina): " + puntosMaquina);
@@ -55,20 +55,11 @@ public class Juego26 {
             }
         }
 
-        int ganancia = 0;
-        if (puntosJugador == 26) {
-            ganancia = apuesta * 2;
-            tamagochi.cambiarDinero(ganancia);
-            System.out.println("");
-            System.out.println(tamagochi.getNombre() + " ha ganado " + ganancia + " $");
-        } else {
-            ganancia = -apuesta;
-            tamagochi.cambiarDinero(ganancia);
-            System.out.println("");
-            System.out.println(tamagochi.getNombre() + " ha perdido " + (-ganancia) + " $");
-        }
-
-        System.out.println("GANANCIA: " + ganancia + " $");
+        int ganancia = puntosJugador == 26 ? apuesta * 2 : -apuesta;
+        tamagochi.cambiarDinero(ganancia);
+        Utils.escribirConEfecto(ganancia > 0
+                ? "\n" + tamagochi.getNombre() + " ha ganado --> " + ganancia + " $"
+                : "\n" + tamagochi.getNombre() + " ha perdido --> " + (apuesta) + " $", 30);
 
         tamagochi.cambiarSueno(10);
         tamagochi.cambiarHambre(6);
