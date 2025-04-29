@@ -2,17 +2,20 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-public class Ruleta {
-    private Tamagochi tamagochi;
+public class Ruleta extends Juego {
 
     public Ruleta(Tamagochi tamagochi) {
-        this.tamagochi = tamagochi;
+        super(tamagochi);
+    }
+
+    @Override
+    public void jugar() {
+        Utils.escribirConEfecto("Iniciando el juego de la Ruleta...", 30);
     }
 
     public void jugarRuleta(int apuesta, int[] numerosSeleccionados) {
         if (apuesta > tamagochi.getDinero()) {
-            System.out.println("");
-            System.out.println(tamagochi.getNombre() + " no tiene suficiente dinero para apostar.");
+            Utils.escribirConEfecto("\n" + tamagochi.getNombre() + " no tiene suficiente dinero para apostar.", 30);
             return;
         }
 
@@ -29,8 +32,7 @@ public class Ruleta {
                 bolaResultado = random.nextInt(20) + 1;
             } while (bolasResultados.contains(bolaResultado));
             bolasResultados.add(bolaResultado);
-            System.out.println("");
-            System.out.println("La bola " + (i + 1) + " ha caído en el número: " + bolaResultado);
+            Utils.escribirConEfecto("\nLa bola " + (i + 1) + " ha caído en el número: " + bolaResultado, 30);
 
             boolean acertado = false;
             for (int numero : numerosSeleccionados) {
@@ -43,20 +45,14 @@ public class Ruleta {
             if (acertado) {
                 ganancia += apuesta * 2;
             } else {
-                ganancia -= apuesta;
+                ganancia = 0;
             }
         }
 
         tamagochi.cambiarDinero(ganancia);
-        if (ganancia > 0) {
-            System.out.println("");
-            System.out.println(tamagochi.getNombre() + " ha ganado " + ganancia + " $");
-        } else {
-            System.out.println("");
-            System.out.println(tamagochi.getNombre() + " ha perdido " + (-ganancia) + " $");
-        }
-
-        System.out.println("GANANCIA: " + ganancia + " $");
+        Utils.escribirConEfecto(ganancia > 0
+                ? "\n" + tamagochi.getNombre() + " ha ganado --> " + ganancia + " $"
+                : "\n" + tamagochi.getNombre() + " ha perdido --> " + (apuesta) + " $", 30);
 
         tamagochi.cambiarSueno(10);
         tamagochi.cambiarHambre(6);
