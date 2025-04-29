@@ -10,7 +10,6 @@ public class Tamagochi {
     private int horaDelDia;
     private Random random;
 
-    
     public Tamagochi(String nombre) {
         this.nombre = nombre;
         this.dinero = 50;
@@ -22,7 +21,6 @@ public class Tamagochi {
         this.deuda = generarDeuda();
     }
 
-    
     public int getDinero() {
         return dinero;
     }
@@ -31,7 +29,6 @@ public class Tamagochi {
         return nombre;
     }
 
-    
     public void cambiarDinero(int cantidad) {
         dinero += cantidad;
     }
@@ -47,6 +44,10 @@ public class Tamagochi {
     public void avanzarTiempo(int minutos) {
         horaDelDia += minutos;
         if (horaDelDia >= 1440) { 
+            if (deuda > 0) {
+                Utils.escribirConEfecto("\n¡Oh, no! " + nombre + " no ha pagado su deuda antes de que termine el día.", 30);
+                throw new IllegalStateException("Juego terminado: No pagaste la deuda a tiempo");
+            }
             dia++;
             deuda = generarDeuda();
             horaDelDia -= 1440;
@@ -61,9 +62,9 @@ public class Tamagochi {
         if (dinero >= deuda) {
             dinero -= deuda;
             deuda = 0;
-            System.out.println("\n" + nombre + " ha pagado su deuda!");
+            Utils.escribirConEfecto("\n" + nombre + " ha pagado su deuda!", 30);
         } else {
-            System.out.println("\n" + nombre + " no tiene suficiente dinero para pagar su deuda.");
+            Utils.escribirConEfecto("\n" + nombre + " no tiene suficiente dinero para pagar su deuda.", 30);
         }
         cambiarSueno(5);
         cambiarHambre(3);
@@ -72,7 +73,7 @@ public class Tamagochi {
     }
 
     public void dormir(int horas) {
-        System.out.println("\n" + nombre + " se despide. ¡Se va a dormir por " + horas + " horas!");
+        Utils.escribirConEfecto("\n" + nombre + " se despide. ¡Se va a dormir por " + horas + " horas!", 30);
         sueno = Math.max(0, sueno - (horas == 9 ? 80 : horas == 6 ? 50 : 25));
         hambre = Math.min(100, hambre + 10);
         avanzarTiempo(horas * 60);
@@ -81,25 +82,26 @@ public class Tamagochi {
 
     public void evaluarEstado() {
         if (dinero <= 0) {
-            System.out.println("Oh, Oh! " + nombre + " ha sido arrestado por la policía.");
+            Utils.escribirConEfecto("Oh, Oh! " + nombre + " ha sido arrestado por la policía.", 30);
             throw new IllegalStateException("Juego terminado");
         } else if (sueno >= 100) {
-            System.out.println("Oh, Oh! " + nombre + " se ha quedado dormido en un casino y le han robado todo el dinero.");
+            Utils.escribirConEfecto("Oh, Oh! " + nombre + " se ha quedado dormido en un casino y le han robado todo el dinero.", 30);
             throw new IllegalStateException("Juego terminado");
         } else if (hambre >= 100) {
-            System.out.println("Oh, Oh! " + nombre + " ha muerto por no alimentarse.");
+            Utils.escribirConEfecto("Oh, Oh! " + nombre + " ha muerto por no alimentarse.", 30);
             throw new IllegalStateException("Juego terminado");
         }
     }
 
     public void mostrarEstado() {
-        System.out.println("\nEstado de " + nombre + ":");
-        System.out.println("Día --> " + dia);
-        System.out.println("Hora --> " + (horaDelDia / 60) + ":" + (horaDelDia % 60));
-        System.out.println("Sueño --> " + sueno);
-        System.out.println("Hambre--> " + hambre);
-        System.out.println("Dinero --> " + dinero + " $");
-        System.out.println("Deuda --> " + deuda + " $");
+        String estado = "\nEstado de " + nombre + ":\n" +
+            "Día --> " + dia + "\n" +
+            "Hora --> " + (horaDelDia / 60) + ":" + (horaDelDia % 60) + "\n" +
+            "Sueño --> " + sueno + "\n" +
+            "Hambre --> " + hambre + "\n" +
+            "Dinero --> " + dinero + " $\n" +
+            "Deuda --> " + deuda + " $";
+        Utils.escribirConEfecto(estado, 30);
     }
 
     public void comer(int opcion) {
@@ -107,18 +109,16 @@ public class Tamagochi {
         int hambreReducida = calcularHambreReducida(opcion);
 
         if (costo == 0 || hambreReducida == 0) {
-            System.out.println("\nOpción de comida no válida.");
+            Utils.escribirConEfecto("\nOpción de comida no válida.", 30);
             return;
         }
 
         if (dinero >= costo) {
-            System.out.println("");
-            System.out.println(nombre + " dice que la comida está ¡BRUTAL!.");
+            Utils.escribirConEfecto("\n" + nombre + " dice que la comida está ¡BRUTAL!.", 30);
             cambiarHambre(-hambreReducida);
             cambiarDinero(-costo);
         } else {
-            System.out.println("");
-            System.out.println(nombre + " no tiene suficiente dinero para comer.");
+            Utils.escribirConEfecto("\n" + nombre + " no tiene suficiente dinero para comer.", 30);
         }
 
         cambiarSueno(8);
