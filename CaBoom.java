@@ -10,8 +10,7 @@ public class CaBoom {
 
     public void jugarMapa(int apuesta) {
         if (apuesta > tamagochi.getDinero()) {
-            System.out.println("");
-            System.out.println(tamagochi.getNombre() + " no tiene suficiente dinero para apostar.");
+            Utils.escribirConEfecto("\n" + tamagochi.getNombre() + " no tiene suficiente dinero para apostar.", 30);
             return;
         }
 
@@ -32,7 +31,6 @@ public class CaBoom {
             }
         }
 
-        // Inicializar celdas vacías
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 if (mapa[i][j] == null) {
@@ -47,11 +45,9 @@ public class CaBoom {
 
         Scanner scanner = new Scanner(System.in);
 
-        // Lógica del juego
         while (true) {
             visitado[posicion[0]][posicion[1]] = true;
-            System.out.println("");
-            System.out.println("Mapa:");
+            Utils.escribirConEfecto("\nMapa:", 30);
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 5; j++) {
                     if (i == posicion[0] && j == posicion[1]) {
@@ -65,70 +61,65 @@ public class CaBoom {
                 System.out.println();
             }
 
-            System.out.println("");
-            System.out.print("Introduce una dirección (arriba, abajo, izquierda, derecha) o 'parar' para detener: ");
+            Utils.escribirConEfecto("\nIntroduce una dirección (arriba, abajo, izquierda, derecha) o 'parar' para detener: ", 30);
             String direccion = scanner.nextLine();
             if (direccion.equals("parar")) {
                 break;
             }
 
-            // Movimiento del jugador
             switch (direccion) {
                 case "arriba":
                     if (posicion[0] > 0 && !visitado[posicion[0] - 1][posicion[1]]) {
                         posicion[0]--;
                     } else {
-                        System.out.println("Movimiento no válido.");
+                        Utils.escribirConEfecto("Movimiento no válido.", 30);
                     }
                     break;
                 case "abajo":
                     if (posicion[0] < 4 && !visitado[posicion[0] + 1][posicion[1]]) {
                         posicion[0]++;
                     } else {
-                        System.out.println("Movimiento no válido.");
+                        Utils.escribirConEfecto("Movimiento no válido.", 30);
                     }
                     break;
                 case "izquierda":
                     if (posicion[1] > 0 && !visitado[posicion[0]][posicion[1] - 1]) {
                         posicion[1]--;
                     } else {
-                        System.out.println("Movimiento no válido.");
+                        Utils.escribirConEfecto("Movimiento no válido.", 30);
                     }
                     break;
                 case "derecha":
                     if (posicion[1] < 4 && !visitado[posicion[0]][posicion[1] + 1]) {
                         posicion[1]++;
                     } else {
-                        System.out.println("Movimiento no válido.");
+                        Utils.escribirConEfecto("Movimiento no válido.", 30);
                     }
                     break;
                 default:
-                    System.out.println("");
-                    System.out.println("Dirección no válida.");
+                    Utils.escribirConEfecto("\nDirección no válida.", 30);
                     break;
             }
 
-            // Verificar si cae en una bomba
+            
             if (mapa[posicion[0]][posicion[1]].equals("bomba")) {
-                System.out.println("");
-                System.out.println("¡BOOOM! Has encontrado una bomba, has perdido tu dinero.");
+                Utils.escribirConEfecto("\n¡BOOOM! Has encontrado una bomba, has perdido tu dinero.", 30);
                 ganancia = -apuesta;
                 break;
             } else {
                 ganancia += 1.3 * apuesta;
             }
-            System.out.println("");
-            System.out.println("Ganancia actual: " + ganancia + " $");
+            Utils.escribirConEfecto("\nGanancia actual: " + ganancia + " $", 30);
         }
 
         tamagochi.cambiarDinero((int) ganancia);
         if (ganancia > 0) {
-            System.out.println(tamagochi.getNombre() + " ha ganado " + ganancia + " $");
+            Utils.escribirConEfecto(tamagochi.getNombre() + " ha ganado " + ganancia + " $", 30);
         } else {
-            System.out.println(tamagochi.getNombre() + " ha perdido " + (-ganancia) + " $");
+            Utils.escribirConEfecto(tamagochi.getNombre() + " ha perdido " + (-ganancia) + " $", 30);
         }
 
-        System.out.println("GANANCIA: " + ganancia + " $");
+        Utils.escribirConEfecto("GANANCIA: " + ganancia + " $", 30);
 
         tamagochi.cambiarSueno(10);
         tamagochi.cambiarHambre(6);
