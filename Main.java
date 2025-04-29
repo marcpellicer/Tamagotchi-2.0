@@ -18,19 +18,18 @@ public class Main {
     }
 
     private void mostrarMensajeBienvenida() {
-        System.out.println(" ");
-        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------- ");
-        System.out.println("¡BIENVENIDO AL TAMAGOCHI L-U-D-O-P-A-T-A!");
-        System.out.println("- En este juego, tu objetivo es convertirte en el hombre más rico del mundo.");
-        System.out.println("- Para ello deberás gestionar tu dinero, sueño y hambre para alcanzar a la meta.");
-        System.out.println("- ¡Ten cuidado, cada día tendrás que pagar una deuda para que no te coja la policía!");
-        System.out.println("- Para pagar las deudas y convertirte en el hombre más rico podrás ganar dinero jugando a varios juegos: La Ruleta, Al 26, Gemelos o CaBoom.");
-        System.out.println("¡BUENA SUERTE!");
-        System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------\n ");
+        Utils.escribirConEfecto("\n-----------------------------------------------------------------------------------------------------------------------------------------------", 10);
+        Utils.escribirConEfecto("¡BIENVENIDO AL TAMAGOCHI L-U-D-O-P-A-T-A!", 20);
+        Utils.escribirConEfecto("- En este juego, tu objetivo es convertirte en el hombre más rico del mundo.", 20);
+        Utils.escribirConEfecto("- Para ello deberás gestionar tu dinero, sueño y hambre para alcanzar la meta.", 20);
+        Utils.escribirConEfecto("- ¡Ten cuidado, cada día tendrás que pagar una deuda para que no te coja la policía!", 20);
+        Utils.escribirConEfecto("- Para pagar las deudas y convertirte en el hombre más rico podrás ganar dinero jugando a varios juegos: La Ruleta, Al 26, Gemelos o CaBoom.", 20);
+        Utils.escribirConEfecto("¡BUENA SUERTE!", 20);
+        Utils.escribirConEfecto("-----------------------------------------------------------------------------------------------------------------------------------------------\n", 10);
     }
 
     private void iniciarJuego(Scanner scanner) {
-        System.out.print("¿Cómo quieres que se llame tu Tamagochi?: ");
+        Utils.escribirConEfecto("¿Cómo quieres que se llame tu Tamagochi?: ", 30);
         String nombre = scanner.nextLine();
         this.tamagochi = new Tamagochi(nombre);
         this.ruleta = new Ruleta(tamagochi);
@@ -40,15 +39,15 @@ public class Main {
     }
 
     private void mostrarMenu() {
-        System.out.println("\n¿Qué quieres hacer ahora?");
-        System.out.println("1) Ir a dormir");
-        System.out.println("2) Dar de comer");
-        System.out.println("3) Jugar --> La Ruleta");
-        System.out.println("4) Jugar --> Al 26");
-        System.out.println("5) Jugar --> Gemelos");
-        System.out.println("6) Jugar --> CaBoom");
-        System.out.println("7) Pagar deuda");
-        System.out.println("8) Salir\n");
+        Utils.escribirConEfecto("\n¿Qué quieres hacer ahora?", 30);
+        Utils.escribirConEfecto("1) Ir a dormir", 30);
+        Utils.escribirConEfecto("2) Dar de comer", 30);
+        Utils.escribirConEfecto("3) Jugar --> La Ruleta", 30);
+        Utils.escribirConEfecto("4) Jugar --> Al 26", 30);
+        Utils.escribirConEfecto("5) Jugar --> Gemelos", 30);
+        Utils.escribirConEfecto("6) Jugar --> CaBoom", 30);
+        Utils.escribirConEfecto("7) Pagar deuda", 30);
+        Utils.escribirConEfecto("8) Salir\n", 30);
     }
 
     private boolean ejecutarOpcion(int opcion, Scanner scanner) {
@@ -57,12 +56,11 @@ public class Main {
                 case 1:
                     int horas = 0;
                     while (horas < 1 || horas > 3) {
-                        System.out.println("");
-                        System.out.println("¿Cuántas horas quieres que duerma tu Tamagochi? Selecciona una opción.");
-                        System.out.println("1) 3 horas (-25 de sueño)");
-                        System.out.println("2) 6 horas (-50 de sueño)");
-                        System.out.println("3) 9 horas (-80 de sueño)");
-                        System.out.println("");
+                        Utils.escribirConEfecto("\n¿Cuántas horas quieres que duerma tu Tamagochi?", 30);
+                        Utils.escribirConEfecto("1) 3 horas (-25 de sueño)", 30);
+                        Utils.escribirConEfecto("2) 6 horas (-50 de sueño)", 30);
+                        Utils.escribirConEfecto("3) 9 horas (-80 de sueño)", 30);
+                        Utils.escribirConEfecto("\nSelecciona una opción:", 30);
                         horas = scanner.nextInt();
                     }
                     tamagochi.dormir(horas == 1 ? 3 : horas == 2 ? 6 : 9);
@@ -70,27 +68,24 @@ public class Main {
                 case 2:
                     int opcionComida = 0;
                     while (opcionComida < 1 || opcionComida > 3) {
-                        System.out.println("");
-                        System.out.println("¿Qué quieres que coma tu Tamagochi? Selecciona una opción.");
-                        System.out.println("1) Sopa       (-10 de hambre: " + (int) (tamagochi.getDinero() * 0.15) + " $)");
-                        System.out.println("2) Fideos     (-30 de hambre: " + (int) (tamagochi.getDinero() * 0.35) + " $)");
-                        System.out.println("3) Bistec     (-60 de hambre: " + (int) (tamagochi.getDinero() * 0.50) + " $)");
-                        System.out.println("");
+                        Utils.escribirConEfecto("\n¿Qué quieres que coma tu Tamagochi?", 30);
+                        Utils.escribirConEfecto("1) Sopa    (-10 de hambre: " + (int) (tamagochi.getDinero() * 0.15) + " $)", 30);
+                        Utils.escribirConEfecto("2) Fideos  (-30 de hambre: " + (int) (tamagochi.getDinero() * 0.35) + " $)", 30);
+                        Utils.escribirConEfecto("3) Bistec  (-60 de hambre: " + (int) (tamagochi.getDinero() * 0.50) + " $)", 30);
+                        Utils.escribirConEfecto("\nSelecciona una opción:", 30);
                         opcionComida = scanner.nextInt();
                     }
                     tamagochi.comer(opcionComida);
                     break;
                 case 3:
-                    System.out.println("");
-                    System.out.print("¿Cuánto dinero quieres apostar?: ");
+                    Utils.escribirConEfecto("\n¿Cuánto dinero quieres apostar?: ", 30);
                     int apuestaRuleta = scanner.nextInt();
                     Set<Integer> numerosSeleccionadosSet = new HashSet<>();
-                    System.out.println("");
-                    System.out.println("Ahora tienes que seleccionar los números con los que quieres jugar:");
+                    Utils.escribirConEfecto("\nAhora tienes que seleccionar los números con los que quieres jugar:", 30);
                     for (int i = 0; i < 5; i++) {
                         int numero;
                         do {
-                            System.out.print("Número " + (i + 1) + " (1-20): ");
+                            Utils.escribirConEfecto("Número " + (i + 1) + " (1-20): ", 30);
                             numero = scanner.nextInt();
                         } while (numerosSeleccionadosSet.contains(numero) || numero < 1 || numero > 20);
                         numerosSeleccionadosSet.add(numero);
@@ -99,29 +94,25 @@ public class Main {
                     ruleta.jugarRuleta(apuestaRuleta, numerosSeleccionados);
                     break;
                 case 4:
-                    System.out.println("");
-                    System.out.print("¿Cuánto dinero quieres apostar?: ");
+                    Utils.escribirConEfecto("\n¿Cuánto dinero quieres apostar?: ", 30);
                     int apuesta26 = scanner.nextInt();
                     juego26.jugar26(apuesta26);
                     break;
                 case 5:
-                    System.out.println("");
-                    System.out.print("¿Cuánto dinero quieres apostar?: ");
+                    Utils.escribirConEfecto("\n¿Cuánto dinero quieres apostar?: ", 30);
                     int apuestaGemelos = scanner.nextInt();
-                    System.out.print("¿Cuántos dados quieres lanzar?: ");
+                    Utils.escribirConEfecto("\n¿Cuántos dados quieres lanzar?: ", 30);
                     int dados = scanner.nextInt();
                     int[] numerosSeleccionadosGemelos = new int[dados];
-                    System.out.println("");
-                    System.out.println("Selecciona los números para cada dado:");
+                    Utils.escribirConEfecto("\nSelecciona los números con los que quieres jugar para cada dado:", 30);
                     for (int i = 0; i < dados; i++) {
-                        System.out.print("Número para dado " + (i + 1) + " (1-6): ");
+                        Utils.escribirConEfecto("Número para dado " + (i + 1) + " (1-6): ", 30);
                         numerosSeleccionadosGemelos[i] = scanner.nextInt();
                     }
                     gemelos.jugarDados(apuestaGemelos, dados, numerosSeleccionadosGemelos);
                     break;
                 case 6:
-                    System.out.println("");
-                    System.out.print("¿Cuánto dinero quieres apostar?: ");
+                    Utils.escribirConEfecto("\n¿Cuánto dinero quieres apostar?: ", 30);
                     int apuestaCaBoom = scanner.nextInt();
                     caBoom.jugarMapa(apuestaCaBoom);
                     break;
@@ -129,16 +120,13 @@ public class Main {
                     tamagochi.pagarDeuda();
                     break;
                 case 8:
-                    System.out.println("");
-                    System.out.println("¡GRACIAS POR JUGAR! Hasta la próxima.");
-                    System.out.println("");
+                    Utils.escribirConEfecto("\n¡GRACIAS POR JUGAR! Hasta la próxima.", 30);
                     return false;
                 default:
-                    System.out.println("");
-                    System.out.println("Opción no válida. Inténtalo de nuevo.");
+                    Utils.escribirConEfecto("\nOpción no válida. Inténtalo de nuevo.", 30);
             }
         } catch (Exception e) {
-            System.out.println("Error de entrada. Por favor, inténtalo de nuevo.");
+            Utils.escribirConEfecto("Error de entrada. Por favor, inténtalo de nuevo.", 30);
             scanner.nextLine(); // Limpiar buffer
         }
         return true;
@@ -153,7 +141,7 @@ public class Main {
             while (jugando) {
                 tamagochi.mostrarEstado();
                 mostrarMenu();
-                System.out.print("Selecciona una opción: ");
+                Utils.escribirConEfecto("Selecciona una opción: ", 30);
                 int opcion = scanner.nextInt();
                 jugando = ejecutarOpcion(opcion, scanner);
             }
