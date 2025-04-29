@@ -103,7 +103,7 @@ public class CaBoom {
 
             
             if (mapa[posicion[0]][posicion[1]].equals("bomba")) {
-                Utils.escribirConEfecto("\n¡BOOOM! Has encontrado una bomba, has perdido tu dinero.", 30);
+                Utils.escribirConEfecto("\n¡BOOOM! Has encontrado una bomba, has perdido todo tu dinero.\n", 30);
                 ganancia = -apuesta;
                 break;
             } else {
@@ -114,12 +114,10 @@ public class CaBoom {
 
         tamagochi.cambiarDinero((int) ganancia);
         if (ganancia > 0) {
-            Utils.escribirConEfecto(tamagochi.getNombre() + " ha ganado " + ganancia + " $", 30);
+            Utils.escribirConEfecto(tamagochi.getNombre() + " ha ganado --> " + ganancia + " $", 30);
         } else {
-            Utils.escribirConEfecto(tamagochi.getNombre() + " ha perdido " + (-ganancia) + " $", 30);
+            Utils.escribirConEfecto(tamagochi.getNombre() + " ha perdido --> " + (-ganancia) + " $", 30);
         }
-
-        Utils.escribirConEfecto("GANANCIA: " + ganancia + " $", 30);
 
         tamagochi.cambiarSueno(10);
         tamagochi.cambiarHambre(6);
