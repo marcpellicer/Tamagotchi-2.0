@@ -52,11 +52,11 @@ public class Juego26 extends Juego {
 
         
         if (puntosJugador == puntosMaquina) {
-            tamagochi.cambiarDinero(apuesta); // Recuperar dinero inicial en caso de empate
+            tamagochi.cambiarDinero(apuesta); 
             Utils.escribirConEfecto("\n¡Empate! Recuperas tu apuesta inicial.", 30);
         } else if (puntosJugador == 26) {
             tamagochi.cambiarDinero(apuesta * 2);
-            Utils.escribirConEfecto("\n¡Has ganado! Gancia en el juego --> " + (apuesta * 2) + " $", 30);
+            Utils.escribirConEfecto("\n¡Has ganado! Ganancia en el juego --> " + (apuesta * 2) + " $", 30);
         } else {
             tamagochi.cambiarDinero(-apuesta * 3);
             Utils.escribirConEfecto("\n¡Has perdido! Pérdida en el juego --> " + (apuesta * 3) + " $", 30);
