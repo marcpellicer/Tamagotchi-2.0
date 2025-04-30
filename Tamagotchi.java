@@ -83,13 +83,16 @@ public class Tamagochi {
     public void evaluarEstado() {
         if (dinero <= 0) {
             Utils.escribirConEfecto("\nOh, Oh! " + nombre + " ha sido arrestado por la policía.", 30);
-            throw new IllegalStateException("JUEGO TERMINADO!! Te has quedado sin dinero.");
+            Utils.escribirConEfecto("¡JUEGO TERMINADO!\n", 30);
+            System.exit(0); 
         } else if (sueno >= 100) {
-            Utils.escribirConEfecto("\nOh, Oh! " + nombre + " se ha quedado dormido en un casino y le han robado todo el dinero.", 30);
-            throw new IllegalStateException("JUEGO TERMINADO!! Has llegado al maximo de sueño.");
+            Utils.escribirConEfecto("\nOh, Oh! " + nombre + " se ha quedado dormido en un casino.", 30);
+            Utils.escribirConEfecto("¡JUEGO TERMINADO!\n", 30);
+            System.exit(0); 
         } else if (hambre >= 100) {
             Utils.escribirConEfecto("\nOh, Oh! " + nombre + " ha muerto por no alimentarse.", 30);
-            throw new IllegalStateException("JUEGO TERMINADO!! Has llegado al maximo de hambre.");
+            Utils.escribirConEfecto("¡JUEGO TERMINADO!\n", 30);
+            System.exit(0); 
         }
     }
 
