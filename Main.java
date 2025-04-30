@@ -101,7 +101,7 @@ public class Main {
                 case 5:
                     Utils.escribirConEfecto("\n¿Cuánto dinero quieres apostar?: ", 30);
                     int apuestaGemelos = scanner.nextInt();
-                    Utils.escribirConEfecto("\n¿Cuántos dados quieres lanzar?: ", 30);
+                    Utils.escribirConEfecto("\n¿Cuántos dados quieres lanzar?(1-3): ", 30);
                     int dados = scanner.nextInt();
                     int[] numerosSeleccionadosGemelos = new int[dados];
                     Utils.escribirConEfecto("\nSelecciona los números con los que quieres jugar para cada dado:", 30);
