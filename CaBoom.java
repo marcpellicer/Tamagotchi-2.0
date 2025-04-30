@@ -2,6 +2,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class CaBoom {
+
     private Tamagochi tamagochi;
 
     public CaBoom(Tamagochi tamagochi) {
@@ -98,16 +99,14 @@ public class CaBoom {
                     break;
                 default:
                     Utils.escribirConEfecto("\nDirección no válida.", 30);
-                    break;
             }
 
-            
             if (mapa[posicion[0]][posicion[1]].equals("bomba")) {
-                Utils.escribirConEfecto("\n¡BOOOM! Has encontrado una bomba, has perdido todo tu dinero.\n", 30);
+                Utils.escribirConEfecto("\n¡BOOOM! Has encontrado una bomba.\n", 30);
                 ganancia = -apuesta;
                 break;
             } else {
-                ganancia += 1.3 * apuesta;
+                ganancia += 2 * apuesta;
             }
             Utils.escribirConEfecto("\nGanancia actual: " + ganancia + " $", 30);
         }
@@ -116,7 +115,7 @@ public class CaBoom {
         if (ganancia > 0) {
             Utils.escribirConEfecto(tamagochi.getNombre() + " ha ganado --> " + ganancia + " $", 30);
         } else {
-            Utils.escribirConEfecto(tamagochi.getNombre() + " ha perdido --> " + (-ganancia) + " $", 30);
+            Utils.escribirConEfecto(tamagochi.getNombre() + " ha perdido --> " + -ganancia + " $", 30);
         }
 
         tamagochi.cambiarSueno(10);
