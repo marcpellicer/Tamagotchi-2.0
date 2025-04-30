@@ -22,7 +22,7 @@ public class Ruleta extends Juego {
         tamagochi.cambiarDinero(-apuesta);
 
         Set<Integer> bolasResultados = new HashSet<>();
-        int ganancia = 0;
+        int gananciaTotal = 0;
 
         Random random = new Random();
 
@@ -43,16 +43,22 @@ public class Ruleta extends Juego {
             }
 
             if (acertado) {
-                ganancia += apuesta * 2;
+                int perdida = apuesta * 3;
+                gananciaTotal -= perdida;
+                Utils.escribirConEfecto("Ganancia --> -" + perdida + " $", 30);
             } else {
-                ganancia = 0;
+                int ganancia = apuesta * 2;
+                gananciaTotal += ganancia;
+                Utils.escribirConEfecto("Ganancia --> " + ganancia + " $", 30);
             }
         }
 
-        tamagochi.cambiarDinero(ganancia);
-        Utils.escribirConEfecto(ganancia > 0
-                ? "\n" + tamagochi.getNombre() + " ha ganado --> " + ganancia + " $"
-                : "\n" + tamagochi.getNombre() + " ha perdido --> " + (apuesta) + " $", 30);
+        int totalDinero = -apuesta + gananciaTotal;
+        tamagochi.cambiarDinero(totalDinero);
+
+        Utils.escribirConEfecto(totalDinero > 0
+                ? "\n" + tamagochi.getNombre() + " ha ganado en total --> " + totalDinero + " $"
+                : "\n" + tamagochi.getNombre() + " ha perdido en total --> " + (-totalDinero) + " $", 30);
 
         tamagochi.cambiarSueno(10);
         tamagochi.cambiarHambre(6);
